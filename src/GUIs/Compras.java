@@ -4,19 +4,23 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
-import java.awt.Color;
-import javax.swing.JScrollPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Compras extends JInternalFrame {
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Launch the application.
@@ -60,7 +64,17 @@ public class Compras extends JInternalFrame {
 		lblNewLabel_2.setBounds(10, 212, 152, 14);
 		panel.add(lblNewLabel_2);
 		
+		final CompraHamburguesa window2 = new CompraHamburguesa();
+		final CompraPizza window3 = new CompraPizza();
+		final CompraTaco window4 = new CompraTaco();
+		final CompraPapasFritas window5 = new CompraPapasFritas();
+
 		JButton btnComprarHamburguesa = new JButton("COMPRAR");
+		btnComprarHamburguesa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				window2.setVisible(true);
+			}
+		});
 		btnComprarHamburguesa.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
 		btnComprarHamburguesa.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnComprarHamburguesa.setBounds(172, 204, 136, 30);
@@ -90,6 +104,11 @@ public class Compras extends JInternalFrame {
 		panel_1.add(lblNewLabel_2_2);
 		
 		JButton btnComprarPizza = new JButton("COMPRAR");
+		btnComprarPizza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				window3.setVisible(true);
+			}
+		});
 		btnComprarPizza.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
 		btnComprarPizza.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnComprarPizza.setBounds(172, 204, 136, 30);
@@ -118,6 +137,11 @@ public class Compras extends JInternalFrame {
 		panel_2.add(lblNewLabel_2_1);
 		
 		JButton btnComprarTacos = new JButton("COMPRAR");
+		btnComprarTacos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				window4.setVisible(true);
+			}
+		});
 		btnComprarTacos.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
 		btnComprarTacos.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnComprarTacos.setBounds(172, 195, 142, 30);
@@ -146,6 +170,11 @@ public class Compras extends JInternalFrame {
 		panel_2_1.add(lblNewLabel_2_3);
 		
 		JButton btnComprarPapas = new JButton("COMPRAR");
+		btnComprarPapas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				window5.setVisible(true);
+			}
+		});
 		btnComprarPapas.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
 		btnComprarPapas.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnComprarPapas.setBounds(172, 194, 136, 30);

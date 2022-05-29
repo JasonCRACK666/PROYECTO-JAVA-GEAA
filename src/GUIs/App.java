@@ -25,7 +25,9 @@ public class App {
 	private JFrame frmSistemaDePedido;
 	private Compras Compras;
 	private JDesktopPane dpApp;
-
+	private Comentarios Comentarios;
+	private Información Información;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -82,6 +84,11 @@ public class App {
 		toolBar.add(btnCompras);
 		
 		JButton btnInformación = new JButton("INFORMACIÓN");
+		btnInformación.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showPageInformación();
+			}
+		});
 		btnInformación.setFont(new Font("Arial", Font.BOLD, 15));
 		btnInformación.setForeground(new Color(255, 255, 255));
 		btnInformación.setBackground(new Color(135, 206, 250));
@@ -89,6 +96,11 @@ public class App {
 		toolBar.add(btnInformación);
 		
 		JButton btnComentarios = new JButton("COMENTARIOS");
+		btnComentarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showPageComentarios();
+			}
+		});
 		btnComentarios.setFont(new Font("Arial", Font.BOLD, 15));
 		btnComentarios.setForeground(new Color(255, 255, 255));
 		btnComentarios.setBackground(new Color(51, 204, 204));
@@ -111,7 +123,6 @@ public class App {
 		initialize();
 	}
 
-
 	void showPageCompras() {
 		if (Compras == null || Compras.isClosed()) {
 			Compras = new Compras();
@@ -122,6 +133,25 @@ public class App {
 		}
 	}
 
+	void showPageComentarios() {
+		if (Comentarios == null || Comentarios.isClosed()) {
+			Comentarios = new Comentarios();
+			dpApp.add(Comentarios);
+			Dimension size = Comentarios.getSize();
+			Comentarios.setLocation((dpApp.getWidth()-size.width)/2, (dpApp.getHeight()-size.height)/2);
+			Comentarios.show();
+		}
+	}
+	void showPageInformación() {
+		if (Información == null || Información.isClosed()) {
+			Información = new Información();
+			dpApp.add(Información);
+			Dimension size = Información.getSize();
+			Información.setLocation((dpApp.getWidth()-size.width)/2, (dpApp.getHeight()-size.height)/2);
+			Información.show();
+		}
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
