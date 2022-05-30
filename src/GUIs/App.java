@@ -22,7 +22,7 @@ import javax.swing.UIManager;
 
 public class App {
 
-	private JFrame frmSistemaDePedido;
+	JFrame frmSistemaDePedido;
 	private Compras Compras;
 	private JDesktopPane dpApp;
 	private Comentarios Comentarios;

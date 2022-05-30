@@ -2,6 +2,7 @@ package GUIs;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -30,8 +31,9 @@ public class FormularioPrincipal extends JFrame {
 	private JButton btnRegistrarse;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	private FormRegistro fr;
-	private FormLogin fl;
+	
+	private RegisterForm registerForm;
+	private LoginForm loginForm;
 
 	/**
 	 * Launch the application.
@@ -50,10 +52,9 @@ public class FormularioPrincipal extends JFrame {
 	}
 
 	void designGUI() {
-		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FormularioPrincipal.class.getResource("/images/logo de la empresa.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 740, 1056);
+		setBounds(100, 100, 740, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,72 +63,58 @@ public class FormularioPrincipal extends JFrame {
 		btnLogin = new JButton("LOGIN");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cargaRegistro();
+				showLogin();
 			}
 		});
-		btnLogin.setBackground(new Color(255, 250, 250));
-		btnLogin.setFont(new Font("Sitka Small", Font.PLAIN, 34));
+		btnLogin.setBounds(238, 362, 258, 49);
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setBackground(new Color(51, 204, 255));
+		btnLogin.setFont(new Font("Arial", Font.BOLD, 22));
 		
 		btnRegistrarse = new JButton("REGISTRARSE");
-		btnRegistrarse.setBackground(new Color(255, 250, 250));
-		btnRegistrarse.setFont(new Font("Sitka Small", Font.PLAIN, 34));
+		btnRegistrarse.setBounds(238, 422, 258, 49);
+		btnRegistrarse.setForeground(new Color(255, 255, 255));
+		btnRegistrarse.setBackground(new Color(255, 0, 0));
+		btnRegistrarse.setFont(new Font("Arial", Font.BOLD, 22));
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showRegister();
+			}
+		});
 		
 		lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(10, 137, 704, 136);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon(FormularioPrincipal.class.getResource("/images/cocinero (1).png")));
+		contentPane.setLayout(null);
 		
 		lblNewLabel_1 = new JLabel("FOOD GO");
+		lblNewLabel_1.setBounds(10, 61, 704, 81);
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
 		lblNewLabel_1.setForeground(new Color(255, 99, 71));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 54));
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGap(80)
-					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
-					.addGap(49))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGap(31)
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 1124, Short.MAX_VALUE)
-					.addGap(22))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(132)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnLogin, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
-						.addComponent(btnRegistrarse, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
-					.addGap(93))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(64)
-					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-					.addGap(167)
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-					.addGap(87)
-					.addComponent(btnLogin, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-					.addGap(53)
-					.addComponent(btnRegistrarse, GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-					.addGap(92))
-		);
-		contentPane.setLayout(gl_contentPane);
+		lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 50));
+		contentPane.add(lblNewLabel_1);
+		contentPane.add(lblNewLabel);
+		contentPane.add(btnLogin);
+		contentPane.add(btnRegistrarse);
 	}
 	
 	/**
 	 * Create the frame.
 	 */
 	public FormularioPrincipal() {
-		
-		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		designGUI();
 	}
 	
 	
-	void cargaRegistro() {
-		fr = new FormRegistro();
-		fr.show();
+	void showRegister() {
+		RegisterForm register = new RegisterForm();
+		register.setVisible(true);
 	}
 	
+	void showLogin() {
+		LoginForm login = new LoginForm();
+		login.setVisible(true);
+	}
 }

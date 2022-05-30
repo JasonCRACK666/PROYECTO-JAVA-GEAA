@@ -16,7 +16,6 @@ import javax.swing.JButton;
 
 public class Compras extends JInternalFrame {
 	
-
 	/**
 	 * 
 	 */
@@ -37,6 +36,11 @@ public class Compras extends JInternalFrame {
 			}
 		});
 	}
+
+	final CompraHamburguesa window2 = new CompraHamburguesa();
+	final CompraPizza window3 = new CompraPizza();
+	final CompraTaco window4 = new CompraTaco();
+	final CompraPapasFritas window5 = new CompraPapasFritas();
 
 	void designGUI() {
 		setBounds(100, 100, 700, 548);
@@ -64,11 +68,6 @@ public class Compras extends JInternalFrame {
 		lblNewLabel_2.setBounds(10, 212, 152, 14);
 		panel.add(lblNewLabel_2);
 		
-		final CompraHamburguesa window2 = new CompraHamburguesa();
-		final CompraPizza window3 = new CompraPizza();
-		final CompraTaco window4 = new CompraTaco();
-		final CompraPapasFritas window5 = new CompraPapasFritas();
-
 		JButton btnComprarHamburguesa = new JButton("COMPRAR");
 		btnComprarHamburguesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
