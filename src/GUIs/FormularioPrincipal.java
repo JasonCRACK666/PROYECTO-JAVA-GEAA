@@ -53,7 +53,6 @@ public class FormularioPrincipal extends JFrame {
 
 	void designGUI() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FormularioPrincipal.class.getResource("/images/logo de la empresa.jpg")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 580);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
