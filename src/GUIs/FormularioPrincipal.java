@@ -31,7 +31,6 @@ public class FormularioPrincipal extends JFrame {
 	private JButton btnRegistrarse;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	
 	private RegisterForm registerForm;
 	private LoginForm loginForm;
 
@@ -54,6 +53,7 @@ public class FormularioPrincipal extends JFrame {
 	void designGUI() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FormularioPrincipal.class.getResource("/images/logo de la empresa.jpg")));
 		setBounds(100, 100, 740, 580);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -103,17 +103,19 @@ public class FormularioPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public FormularioPrincipal() {
+		setResizable(false);
 		designGUI();
 	}
-	
 	
 	void showRegister() {
 		RegisterForm register = new RegisterForm();
 		register.setVisible(true);
+		this.setVisible(false);
 	}
 	
 	void showLogin() {
 		LoginForm login = new LoginForm();
 		login.setVisible(true);
+		this.setVisible(false);
 	}
 }

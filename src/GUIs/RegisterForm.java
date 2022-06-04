@@ -8,11 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 
 public class RegisterForm extends JFrame {
 
@@ -21,12 +26,15 @@ public class RegisterForm extends JFrame {
 	private JLabel lblNombreDeUsuario;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField tfName;
+	private JTextField tfUsername;
+	private JTextField tfEmail;
 	private JLabel lblNewLabel_1;
-	private JButton btnNewButton;
+	private JButton btnRegister;
+	private JPasswordField tswPassword;
+	private App app;
+	private FormularioPrincipal FormularioPrincipal;
+	private JButton btnRedirectBack;
 
 	/**
 	 * Launch the application.
@@ -48,6 +56,7 @@ public class RegisterForm extends JFrame {
 	 * Create the frame.
 	 */
 	public RegisterForm() {
+		setResizable(false);
 		setBounds(100, 100, 540, 336);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,6 +65,7 @@ public class RegisterForm extends JFrame {
 		setBounds(100, 100, 534, 336);
 		getContentPane().setLayout(null);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		lblNewLabel = new JLabel("Nombre:");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -81,29 +91,23 @@ public class RegisterForm extends JFrame {
 		lblNewLabel_3.setBounds(55, 189, 143, 20);
 		getContentPane().add(lblNewLabel_3);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField.setBounds(211, 92, 234, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		tfName = new JTextField();
+		tfName.setFont(new Font("Arial", Font.PLAIN, 14));
+		tfName.setBounds(211, 92, 234, 20);
+		getContentPane().add(tfName);
+		tfName.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField_1.setBounds(211, 126, 234, 20);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		tfUsername = new JTextField();
+		tfUsername.setFont(new Font("Arial", Font.PLAIN, 14));
+		tfUsername.setBounds(211, 126, 234, 20);
+		getContentPane().add(tfUsername);
+		tfUsername.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField_2.setBounds(211, 157, 234, 20);
-		getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField_3.setBounds(211, 188, 234, 20);
-		getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		tfEmail = new JTextField();
+		tfEmail.setFont(new Font("Arial", Font.PLAIN, 14));
+		tfEmail.setBounds(211, 157, 234, 20);
+		getContentPane().add(tfEmail);
+		tfEmail.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("REGISTRARSE");
 		lblNewLabel_1.setForeground(new Color(255, 0, 0));
@@ -112,12 +116,63 @@ public class RegisterForm extends JFrame {
 		lblNewLabel_1.setBounds(10, 32, 498, 48);
 		getContentPane().add(lblNewLabel_1);
 		
-		btnNewButton = new JButton("Registrarse");
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(255, 0, 51));
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnNewButton.setBounds(211, 219, 121, 33);
-		contentPane.add(btnNewButton);
+		btnRegister = new JButton("Registrarse");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				registerAction();
+			}
+		});
+		btnRegister.setForeground(new Color(255, 255, 255));
+		btnRegister.setBackground(new Color(255, 0, 51));
+		btnRegister.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnRegister.setBounds(211, 219, 121, 33);
+		contentPane.add(btnRegister);
+		
+		tswPassword = new JPasswordField();
+		tswPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+		tswPassword.setBounds(211, 188, 234, 19);
+		contentPane.add(tswPassword);
+		
+		btnRedirectBack = new JButton("");
+		btnRedirectBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				redirectBack();
+			}
+		});
+		btnRedirectBack.setBackground(Color.WHITE);
+		btnRedirectBack.setIcon(new ImageIcon(RegisterForm.class.getResource("/icons24px/back.png")));
+		btnRedirectBack.setBounds(10, 11, 44, 42);
+		contentPane.add(btnRedirectBack);
 	}
-
+	
+	String name, username, email, password;
+	
+	void registerAction() {
+		name = tfName.getText();
+		username = tfUsername.getText();
+		email = tfEmail.getText();
+		password = String.valueOf(tswPassword.getPassword());
+		if (name.equals("") && username.equals("") && email.equals("") && password.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debe de llenar todos los campos");
+		} else if (name.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debe de colocar su nombre");
+		} else if (username.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debe de colocar su nombre de usuario");
+		} else if (email.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debe de colocar su email");
+		} else if (password.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debe de colorcar su password");
+		} else {
+			App window = new App();
+			window.frmSistemaDePedido.setVisible(true);
+			this.setVisible(false);
+		}
+	}
+	
+	void redirectBack() {
+		FormularioPrincipal formPrincipal = new FormularioPrincipal();
+		formPrincipal.setVisible(true);
+		this.setVisible(false);
+	}
+	
 }

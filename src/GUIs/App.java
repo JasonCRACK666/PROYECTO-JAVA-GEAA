@@ -27,6 +27,7 @@ public class App {
 	private JDesktopPane dpApp;
 	private Comentarios Comentarios;
 	private Información Información;
+	private FormularioPrincipal formularioPrincipal;
 	
 	/**
 	 * Launch the application.
@@ -49,7 +50,6 @@ public class App {
 		frmSistemaDePedido.setTitle("Sistema de pedido de comida rapida");
 		frmSistemaDePedido.setBounds(100, 100, 700, 700);
 		frmSistemaDePedido.setExtendedState(Frame.MAXIMIZED_BOTH);
-		frmSistemaDePedido.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
 		toolBar.setBackground(UIManager.getColor("Button.background"));
@@ -108,6 +108,11 @@ public class App {
 		toolBar.add(btnComentarios);
 		
 		JButton btnLogout = new JButton("LOGOUT");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showPrincipalForm();
+			}
+		});
 		btnLogout.setFont(new Font("Arial", Font.BOLD, 15));
 		btnLogout.setForeground(new Color(255, 255, 255));
 		btnLogout.setBackground(new Color(204, 102, 102));
@@ -150,6 +155,12 @@ public class App {
 			Información.setLocation((dpApp.getWidth()-size.width)/2, (dpApp.getHeight()-size.height)/2);
 			Información.show();
 		}
+	}
+	
+	void showPrincipalForm() {
+		FormularioPrincipal formPrincipal = new FormularioPrincipal();
+		formPrincipal.setVisible(true);
+		this.frmSistemaDePedido.setVisible(false);
 	}
 	
 	/**
