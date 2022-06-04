@@ -1,17 +1,16 @@
 package GUIs;
 
-import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -26,6 +25,7 @@ public class LoginForm extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JPasswordField tswPassword;
+	private FormularioPrincipal formularioPrincipal;
 	
 	private App app;
 
@@ -49,8 +49,10 @@ public class LoginForm extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginForm() {
+		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
 		
 		lblNewLabel = new JLabel("LOGIN");
 		lblNewLabel.setForeground(new Color(51, 204, 255));
@@ -95,11 +97,41 @@ public class LoginForm extends JFrame {
 		btnLogin.setFont(new Font("Arial", Font.PLAIN, 16));
 		btnLogin.setBounds(170, 171, 116, 34);
 		getContentPane().add(btnLogin);
+		
+		JButton btnBack = new JButton("");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				redirectBack();
+			}
+		});
+		btnBack.setBackground(Color.WHITE);
+		btnBack.setIcon(new ImageIcon(LoginForm.class.getResource("/icons24px/back.png")));
+		btnBack.setBounds(10, 11, 45, 41);
+		getContentPane().add(btnBack);
 
 	}
 	
+	String email, password;
+	
 	void showApp() {
-		App window = new App();
-		window.frmSistemaDePedido.setVisible(true);
+		email = tfEmail.getText();
+		password = String.valueOf(tswPassword.getPassword());
+		if (password.equals("") && email.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debes de rellenar ambos campos con tus datos");
+		} else if (password.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debe de ingresar su contraseña");
+		} else if (email.equals("")) {
+			JOptionPane.showMessageDialog(this, "Debe de ingresar su correo electrónico");
+		} else {
+			App window = new App();
+			window.frmSistemaDePedido.setVisible(true);
+			this.setVisible(false);
+		}
+	}
+	
+	void redirectBack() {
+		FormularioPrincipal formPrincipal = new FormularioPrincipal();
+		formPrincipal.setVisible(true);
+		this.setVisible(false);
 	}
 }
