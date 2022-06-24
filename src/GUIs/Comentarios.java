@@ -10,20 +10,26 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import java.awt.Color;
 
 public class Comentarios extends JInternalFrame {
 
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextArea txtComent;
+	private JTextArea txtComentarios;
+	private JLabel lblContador;
 
 	/**
 	 * Launch the application.
@@ -44,6 +50,8 @@ public class Comentarios extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	public Comentarios() {
 		setTitle("Comentarios");
 		setBounds(100, 100, 700, 548);
@@ -58,66 +66,79 @@ public class Comentarios extends JInternalFrame {
 		lblComentarios.setFont(new Font("Tahoma", Font.BOLD, 40));
 		contentPane.add(lblComentarios);
 		
-		JLabel lblCli1 = new JLabel("");
-		lblCli1.setIcon(new ImageIcon(Comentarios.class.getResource("/images/Cliente_1.png")));
-		lblCli1.setBounds(34, 93, 75, 75);
-		contentPane.add(lblCli1);
-		
-		JLabel lblCli2 = new JLabel("");
-		lblCli2.setIcon(new ImageIcon(Comentarios.class.getResource("/images/Cliente_2.png")));
-		lblCli2.setBounds(34, 197, 75, 75);
-		contentPane.add(lblCli2);
-		
-		JLabel lblCli3 = new JLabel("");
-		lblCli3.setIcon(new ImageIcon(Comentarios.class.getResource("/images/Cliente_3.png")));
-		lblCli3.setBounds(34, 301, 75, 75);
-		contentPane.add(lblCli3);
-		
-		JTextArea txtComent1 = new JTextArea();
-		txtComent1.setLineWrap(true);
-		txtComent1.setEditable(false);
-		txtComent1.setFont(new Font("Arial Black", Font.BOLD, 14));
-		txtComent1.setText("Su delivery muy rápido y muy amable. La comida espectacular. Muy pero muy recomendado.");
-		txtComent1.setBounds(119, 100, 536, 60);
-		contentPane.add(txtComent1);
-		
-		JTextArea txtComent2 = new JTextArea();
-		txtComent2.setLineWrap(true);
-		txtComent2.setEditable(false);
-		txtComent2.setText("Demasiado rico todo, sus papitas super crocantes y sus cremas top!! Recomendado total");
-		txtComent2.setFont(new Font("Arial Black", Font.BOLD, 14));
-		txtComent2.setBounds(119, 205, 536, 60);
-		contentPane.add(txtComent2);
-		
-		JTextArea txtComent3 = new JTextArea();
-		txtComent3.setText("Hamburgesa 10/10");
-		txtComent3.setLineWrap(true);
-		txtComent3.setFont(new Font("Arial Black", Font.BOLD, 14));
-		txtComent3.setEditable(false);
-		txtComent3.setBounds(119, 310, 536, 60);
-		contentPane.add(txtComent3);
-		
 		JButton btnComent = new JButton("Comentar");
 		btnComent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Publicado con exito");
-			}
+				if(txtComent.getText().trim().equals("")) {
+				    JOptionPane.showMessageDialog(null, "No puedes comentar en blanco");
+				    txtComent.setText(null);
+				}	
+				else if (contador() < 0){
+				    JOptionPane.showMessageDialog(null, "No puedes superar el limite de caracteres");
+				    txtComent.setText(null);}
+				else if (RegisterForm.username == null){
+					String Com = txtComent.getText();
+					JOptionPane.showMessageDialog(null, "El comentario se ha publicado con exito");
+					txtComentarios.append(LoginForm.usuario+"\n\n");
+					txtComentarios.append(Com+"\n\n\n");
+				}
+				else {
+					String Com = txtComent.getText();
+					JOptionPane.showMessageDialog(null, "El comentario se ha publicado con exito");
+					txtComentarios.append(RegisterForm.username+"\n\n");
+					txtComentarios.append(Com+"\n\n\n");
+				}
+			}	
 		});
-		btnComent.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnComent.setBounds(547, 415, 129, 73);
-		contentPane.add(btnComent);
 		
+		btnComent.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnComent.setBounds(547, 428, 129, 60);
+		contentPane.add(btnComent);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 413, 527, 73);
+		scrollPane.setBounds(10, 426, 532, 60);
 		contentPane.add(scrollPane);
 		
-		JTextArea txtComent = new JTextArea();
+		txtComent = new JTextArea();
+		txtComent.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				lblContador.setText(""+contador());
+			}
+			@Override
+			public void keyTyped(KeyEvent e) { 
+				if(contador() == 0) {
+					e.consume();
+				}
+			}
+		});
 		scrollPane.setViewportView(txtComent);
 		txtComent.setLineWrap(true);
 		txtComent.setFont(new Font("Arial Black", Font.BOLD, 14));
-	
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(15, 79, 671, 314);
+		contentPane.add(scrollPane_1);
+		
+		txtComentarios = new JTextArea();
+		txtComentarios.setLineWrap(true);
+		txtComentarios.setEditable(false);
+		txtComentarios.setFont(new Font("Arial Black", Font.BOLD, 14));
+		txtComentarios.setText("Melady Morales\r\n\nSu delivery muy rápido y muy amable. La comida espectacular. Muy pero muy recomendado.\r\n\r\n\r\nJorge Luis Mendez\r\n\nDemasiado rico todo, sus papitas super crocantes y sus cremas top!! Recomendado total\r\n\r\n\r\n");
+		scrollPane_1.setViewportView(txtComentarios);
+		
+		lblContador = new JLabel("300");
+		lblContador.setForeground(Color.RED);
+		lblContador.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblContador.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblContador.setBounds(483, 403, 59, 25);
+		contentPane.add(lblContador);
+		
 		setClosable(true);
 		setResizable(true);
 	}
+	public int contador() {
+		String caracteres = txtComent.getText();
+		int num = 300 - caracteres.length();
+		return num;
+	}
 }
-

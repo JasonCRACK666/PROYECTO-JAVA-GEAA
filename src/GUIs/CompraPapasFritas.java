@@ -1,6 +1,5 @@
 package GUIs;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,16 +7,27 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import Objects.PapasFritas;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CompraPapasFritas extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JComboBox<String> cboTamPapa;
 
 	/**
 	 * Launch the application.
@@ -39,6 +49,7 @@ public class CompraPapasFritas extends JFrame {
 	 * Create the frame.
 	 */
 	public CompraPapasFritas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CompraPapasFritas.class.getResource("/images/logo de la empresa.jpg")));
 		setTitle("Datos de Compra - PAPAS FRITAS");
 		setBounds(100, 100, 806, 388);
 		contentPane = new JPanel();
@@ -70,8 +81,8 @@ public class CompraPapasFritas extends JFrame {
 		label_3.setBounds(334, 92, 358, 29);
 		contentPane.add(label_3);
 		
-		JComboBox cboTamPapa = new JComboBox();
-		cboTamPapa.setModel(new DefaultComboBoxModel(new String[] {"Papa Regular", "Papa Grande (+ S/.1.00)", "Papa Familiar (+ S/.4.00)", "Papa Super Familiar (+ S/.7.00)"}));
+		cboTamPapa = new JComboBox<String>();
+		cboTamPapa.setModel(new DefaultComboBoxModel<String>(new String[] {"Papa Regular", "Papa Grande (+ S/.1.00)", "Papa Familiar (+ S/.4.00)", "Papa Super Familiar (+ S/.7.00)"}));
 		cboTamPapa.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		cboTamPapa.setBackground(Color.WHITE);
 		cboTamPapa.setBounds(334, 125, 270, 29);
@@ -83,9 +94,50 @@ public class CompraPapasFritas extends JFrame {
 		contentPane.add(label_4);
 		
 		JButton btnComprarPapa = new JButton("COMPRAR");
+		btnComprarPapa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comprarPapasFritas();
+			}
+		});
 		btnComprarPapa.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		btnComprarPapa.setBounds(637, 207, 137, 35);
 		contentPane.add(btnComprarPapa);
 	}
 
+	private void comprarPapasFritas() {
+		int indexSize;
+		double price = 0;
+		String size = "";
+		
+		indexSize = cboTamPapa.getSelectedIndex();
+		
+		switch (indexSize) {
+			case 0:
+				size = "Papa regular";
+				price = 0;
+				break;
+			case 1:
+				size = "Papa grande";
+				price = 1;
+				break;
+			case 2:
+				size = "Papa familiar";
+				price = 4;
+				break;
+			case 3:
+				size = "Papa super familiar";
+				price = 7;
+				break;
+			default:
+				break;
+		}
+
+		PapasFritas papasFritas = new PapasFritas(size, price);
+		
+		this.setVisible(false);
+		BoletaVentaPapasFritas boleta = new BoletaVentaPapasFritas();
+		boleta.getData(papasFritas);
+		boleta.setVisible(true);
+	}
+	
 }
