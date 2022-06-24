@@ -19,6 +19,7 @@ import java.awt.Font;
 import java.awt.Frame;
 
 import javax.swing.UIManager;
+import java.awt.Toolkit;
 
 public class App {
 
@@ -27,7 +28,6 @@ public class App {
 	private JDesktopPane dpApp;
 	private Comentarios Comentarios;
 	private Información Información;
-	private FormularioPrincipal formularioPrincipal;
 	
 	/**
 	 * Launch the application.
@@ -47,6 +47,7 @@ public class App {
 	
 	void designGUI() {
 		frmSistemaDePedido = new JFrame();
+		frmSistemaDePedido.setIconImage(Toolkit.getDefaultToolkit().getImage(App.class.getResource("/images/logo de la empresa.jpg")));
 		frmSistemaDePedido.setTitle("Sistema de pedido de comida rapida");
 		frmSistemaDePedido.setBounds(100, 100, 700, 700);
 		frmSistemaDePedido.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -56,7 +57,7 @@ public class App {
 		toolBar.setFloatable(false);
 		
 		dpApp = new JDesktopPane();
-		dpApp.setBackground(UIManager.getColor("Button.background"));
+		dpApp.setBackground(Color.WHITE);
 		GroupLayout groupLayout = new GroupLayout(frmSistemaDePedido.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

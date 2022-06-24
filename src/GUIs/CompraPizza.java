@@ -1,6 +1,5 @@
 package GUIs;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,16 +9,28 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+
+import Objects.Pizza;
+
 import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CompraPizza extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JComboBox<String> cboSaborPiz;
+	private JComboBox<String> cboTamPizza;
 
 	/**
 	 * Launch the application.
@@ -41,6 +52,7 @@ public class CompraPizza extends JFrame {
 	 * Create the frame.
 	 */
 	public CompraPizza() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CompraPizza.class.getResource("/images/logo de la empresa.jpg")));
 		setTitle("Datos de Compra - PIZZA");
 		setBounds(100, 100, 831, 517);
 		contentPane = new JPanel();
@@ -127,8 +139,8 @@ public class CompraPizza extends JFrame {
 		label_7.setBounds(10, 330, 242, 29);
 		contentPane.add(label_7);
 		
-		JComboBox cboSaborPiz = new JComboBox();
-		cboSaborPiz.setModel(new DefaultComboBoxModel(new String[] {"Americana", "Mozzarella", "Pepperoni"}));
+		cboSaborPiz = new JComboBox<String>();
+		cboSaborPiz.setModel(new DefaultComboBoxModel<String>(new String[] {"Americana", "Mozzarella", "Pepperoni"}));
 		cboSaborPiz.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		cboSaborPiz.setBackground(Color.WHITE);
 		cboSaborPiz.setBounds(264, 330, 123, 29);
@@ -139,8 +151,8 @@ public class CompraPizza extends JFrame {
 		label_8.setBounds(10, 372, 262, 29);
 		contentPane.add(label_8);
 		
-		JComboBox cboTamPizza = new JComboBox();
-		cboTamPizza.setModel(new DefaultComboBoxModel(new String[] {"Personal", "Mediana (+ S/.20.00)", "Grande (+ S/.30.00)", "Familiar (+ S/.40.00)"}));
+		cboTamPizza = new JComboBox<String>();
+		cboTamPizza.setModel(new DefaultComboBoxModel<String>(new String[] {"Personal", "Mediana (+ S/.20.00)", "Grande (+ S/.30.00)", "Familiar (+ S/.40.00)"}));
 		cboTamPizza.setFont(new Font("Century Gothic", Font.PLAIN, 16));
 		cboTamPizza.setBackground(Color.WHITE);
 		cboTamPizza.setBounds(284, 372, 191, 29);
@@ -152,8 +164,63 @@ public class CompraPizza extends JFrame {
 		contentPane.add(label_9);
 		
 		JButton btnComprarPizza = new JButton("COMPRAR");
+		btnComprarPizza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comprarPizza();
+			}
+		});
 		btnComprarPizza.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		btnComprarPizza.setBounds(665, 419, 137, 35);
 		contentPane.add(btnComprarPizza);
+	}
+	
+	private void comprarPizza() {
+		int indexSabPizza, indexTamPizza;
+		double price = 0;
+		String sabPizza = "", tamPizza = "";
+		
+		indexSabPizza = cboSaborPiz.getSelectedIndex();
+		indexTamPizza = cboTamPizza.getSelectedIndex();
+		
+		switch (indexSabPizza) {
+			case 0:
+				sabPizza = "Americana";
+				break;
+			case 1:
+				sabPizza = "Mozzarella";
+				break;
+			case 2:
+				sabPizza = "Pepperoni";
+				break;
+			default:
+				break;
+		}
+		
+		switch (indexTamPizza) {
+			case 0:
+				price = 0;
+				tamPizza = "Personal";
+				break;
+			case 1:
+				price = 20;
+				tamPizza = "Mediana";
+				break;
+			case 2:
+				price = 30;
+				tamPizza = "Grande";
+				break;
+			case 3:
+				price = 40;
+				tamPizza = "Familiar";
+				break;
+			default:
+				break;
+		}
+
+		Pizza pizza = new Pizza(price, sabPizza, tamPizza);
+		this.setVisible(false);
+		BoletaVentaPizza boleta = new BoletaVentaPizza();
+		boleta.getData(pizza);
+		boleta.setVisible(true);
 	}
 }

@@ -1,6 +1,5 @@
 package GUIs;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,7 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
+
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
@@ -20,10 +21,25 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+
+import Objects.Hamburguesa;
+import java.awt.Toolkit;
 
 public class CompraHamburguesa extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField txtCantidad;
+	private JComboBox<String> cboTamanoHam;
+	private JCheckBox chkHuevoFrito;
+	private JCheckBox chkPapasAlHilo;
+	private JCheckBox chkPlatanoFrito;
+	private JCheckBox chkQueso;
+	private JCheckBox chkTocino;
 
 	/**
 	 * Launch the application.
@@ -40,11 +56,12 @@ public class CompraHamburguesa extends JFrame {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public CompraHamburguesa() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CompraHamburguesa.class.getResource("/images/logo de la empresa.jpg")));
 		setResizable(false);
 		setTitle("Datos de Compra - HAMBURGUESA");
 		setBackground(Color.WHITE);
@@ -54,6 +71,7 @@ public class CompraHamburguesa extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
+		setLocationRelativeTo(null);
 		
 		JLabel lblImageHamburgueso = new JLabel("");
 		lblImageHamburgueso.setBounds(10, 30, 358, 334);
@@ -102,12 +120,12 @@ public class CompraHamburguesa extends JFrame {
 		label_7.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		contentPane.add(label_7);
 		
-		JComboBox cboTamaloHam = new JComboBox();
-		cboTamaloHam.setBounds(380, 240, 207, 22);
-		cboTamaloHam.setModel(new DefaultComboBoxModel(new String[] {"Mediana", "Grande (+ S/.3.00)"}));
-		cboTamaloHam.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-		cboTamaloHam.setBackground(Color.WHITE);
-		contentPane.add(cboTamaloHam);
+		cboTamanoHam = new JComboBox<String>();
+		cboTamanoHam.setBounds(380, 240, 207, 22);
+		cboTamanoHam.setModel(new DefaultComboBoxModel<String>(new String[] {"Mediana", "Grande (+ S/.3.00)"}));
+		cboTamanoHam.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		cboTamanoHam.setBackground(Color.WHITE);
+		contentPane.add(cboTamanoHam);
 		
 		JLabel label_8 = new JLabel("PERSONALIZA TU HAMBURGUESA");
 		label_8.setBounds(380, 275, 358, 29);
@@ -142,58 +160,58 @@ public class CompraHamburguesa extends JFrame {
 		label_10.setFont(new Font("Century Gothic", Font.PLAIN, 18));
 		contentPane.add(label_10);
 		
-		JCheckBox checkBox_3 = new JCheckBox("Huevo Frito");
-		checkBox_3.setBounds(240, 374, 113, 35);
-		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_3.setBackground(Color.WHITE);
-		contentPane.add(checkBox_3);
+		chkHuevoFrito = new JCheckBox("Huevo Frito");
+		chkHuevoFrito.setBounds(240, 374, 113, 35);
+		chkHuevoFrito.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkHuevoFrito.setBackground(Color.WHITE);
+		contentPane.add(chkHuevoFrito);
 		
-		JCheckBox checkBox_4 = new JCheckBox("Papas al Hilo");
-		checkBox_4.setBounds(356, 374, 125, 35);
-		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_4.setBackground(Color.WHITE);
-		contentPane.add(checkBox_4);
+		chkPapasAlHilo = new JCheckBox("Papas al Hilo");
+		chkPapasAlHilo.setBounds(356, 374, 125, 35);
+		chkPapasAlHilo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkPapasAlHilo.setBackground(Color.WHITE);
+		contentPane.add(chkPapasAlHilo);
 		
-		JCheckBox checkBox_5 = new JCheckBox("Pl\u00E1tano Frito");
-		checkBox_5.setBounds(485, 374, 120, 35);
-		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_5.setBackground(Color.WHITE);
-		contentPane.add(checkBox_5);
+		chkPlatanoFrito = new JCheckBox("Pl\u00E1tano Frito");
+		chkPlatanoFrito.setBounds(485, 374, 120, 35);
+		chkPlatanoFrito.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkPlatanoFrito.setBackground(Color.WHITE);
+		contentPane.add(chkPlatanoFrito);
 		
-		JCheckBox checkBox_6 = new JCheckBox("Queso");
-		checkBox_6.setBounds(609, 374, 76, 35);
-		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_6.setBackground(Color.WHITE);
-		contentPane.add(checkBox_6);
+		chkQueso = new JCheckBox("Queso");
+		chkQueso.setBounds(609, 374, 76, 35);
+		chkQueso.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkQueso.setBackground(Color.WHITE);
+		contentPane.add(chkQueso);
 		
-		JCheckBox checkBox_7 = new JCheckBox("Tocino");
-		checkBox_7.setBounds(692, 374, 113, 35);
-		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_7.setBackground(Color.WHITE);
-		contentPane.add(checkBox_7);
+		chkTocino = new JCheckBox("Tocino");
+		chkTocino.setBounds(692, 374, 113, 35);
+		chkTocino.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkTocino.setBackground(Color.WHITE);
+		contentPane.add(chkTocino);
 		
 		JLabel label_11 = new JLabel("ELIGE TUS SALSAS");
 		label_11.setBounds(10, 410, 358, 29);
 		label_11.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		contentPane.add(label_11);
 		
-		JRadioButton radioButton = new JRadioButton("Mayonesa");
-		radioButton.setBounds(10, 437, 127, 35);
-		radioButton.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-		radioButton.setBackground(Color.WHITE);
-		contentPane.add(radioButton);
+		JRadioButton radioMostaza = new JRadioButton("Mostaza");
+		radioMostaza.setBounds(10, 437, 127, 35);
+		radioMostaza.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		radioMostaza.setBackground(Color.WHITE);
+		contentPane.add(radioMostaza);
 		
-		JRadioButton radioButton_1 = new JRadioButton("Ketchup");
-		radioButton_1.setBounds(141, 437, 127, 35);
-		radioButton_1.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-		radioButton_1.setBackground(Color.WHITE);
-		contentPane.add(radioButton_1);
+		JRadioButton radioKetchup = new JRadioButton("Ketchup");
+		radioKetchup.setBounds(141, 437, 127, 35);
+		radioKetchup.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		radioKetchup.setBackground(Color.WHITE);
+		contentPane.add(radioKetchup);
 		
-		JRadioButton radioButton_2 = new JRadioButton("Aj\u00ED");
-		radioButton_2.setBounds(272, 437, 127, 35);
-		radioButton_2.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-		radioButton_2.setBackground(Color.WHITE);
-		contentPane.add(radioButton_2);
+		JRadioButton radioAji = new JRadioButton("Aj\u00ED");
+		radioAji.setBounds(272, 437, 127, 35);
+		radioAji.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		radioAji.setBackground(Color.WHITE);
+		contentPane.add(radioAji);
 		
 		JLabel label_12 = new JLabel("* Descuentos del 10% los d\u00EDas Lunes, Mi\u00E9rcoles y Viernes en cualquier tama\u00F1o de hamburguesa");
 		label_12.setBounds(10, 472, 539, 35);
@@ -203,11 +221,66 @@ public class CompraHamburguesa extends JFrame {
 		JButton btnComprarHam = new JButton("COMPRAR");
 		btnComprarHam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				compraHamburguesa();
 			}
 		});
 		btnComprarHam.setBounds(768, 469, 137, 35);
 		btnComprarHam.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		contentPane.add(btnComprarHam);
+		
+		txtCantidad = new JTextField();
+		txtCantidad.setBackground(Color.WHITE);
+		txtCantidad.setBounds(704, 472, 54, 29);
+		contentPane.add(txtCantidad);
+		txtCantidad.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Cantidad");
+		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		lblNewLabel.setBounds(610, 475, 84, 22);
+		contentPane.add(lblNewLabel);
 	}
+	
+	private void compraHamburguesa() {
+		int cantidad, precioVenta, cT;
+		String tipoHamburguesa;
+		cantidad = Integer.parseInt(txtCantidad.getText());
+		tipoHamburguesa = String.valueOf(cboTamanoHam.getSelectedItem());
+		
+		// create the object hamburger
+		Hamburguesa hamburguesa = new Hamburguesa();
+		hamburguesa.setAmount(cantidad);
+		
+		// VERIFICAMOS LOS EXTRAS
+		if (chkHuevoFrito.isSelected())
+			hamburguesa.setExtra("Huevo frito");
+		
+		if (chkPapasAlHilo.isSelected())
+			hamburguesa.setExtra("Papas al hilo");
+		
+		if (chkPlatanoFrito.isSelected())
+			hamburguesa.setExtra("Platano frito");
+		
+		if (chkQueso.isSelected())
+			hamburguesa.setExtra("Queso");
+		
+		if (chkTocino.isSelected())
+			hamburguesa.setExtra("Tocino");
+		
+		cT = hamburguesa.getCountExtras();
+		
+		if (tipoHamburguesa == "Mediana") {
+			precioVenta = cantidad * (10 + (cT * 2));
+			hamburguesa.setSize("Mediana");
+		} else {
+			precioVenta = cantidad * (13 + (cT * 2));
+			hamburguesa.setSize("Grande");
+		}
+		
+		hamburguesa.setPriceTotal(precioVenta);;
 
+		this.setVisible(false);
+		BoletaVentaHamburguesa boletaVenta = new BoletaVentaHamburguesa();
+		boletaVenta.getData(hamburguesa);
+		boletaVenta.setVisible(true);
+	}
 }

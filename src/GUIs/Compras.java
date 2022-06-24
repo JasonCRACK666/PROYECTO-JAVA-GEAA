@@ -37,11 +37,6 @@ public class Compras extends JInternalFrame {
 		});
 	}
 
-	final CompraHamburguesa window2 = new CompraHamburguesa();
-	final CompraPizza window3 = new CompraPizza();
-	final CompraTaco window4 = new CompraTaco();
-	final CompraPapasFritas window5 = new CompraPapasFritas();
-
 	void designGUI() {
 		setBounds(100, 100, 700, 548);
 		getContentPane().setLayout(null);
@@ -71,7 +66,7 @@ public class Compras extends JInternalFrame {
 		JButton btnComprarHamburguesa = new JButton("COMPRAR");
 		btnComprarHamburguesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				window2.setVisible(true);
+				showHamburguesa();
 			}
 		});
 		btnComprarHamburguesa.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
@@ -105,7 +100,7 @@ public class Compras extends JInternalFrame {
 		JButton btnComprarPizza = new JButton("COMPRAR");
 		btnComprarPizza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				window3.setVisible(true);
+				showPizza();
 			}
 		});
 		btnComprarPizza.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
@@ -138,7 +133,7 @@ public class Compras extends JInternalFrame {
 		JButton btnComprarTacos = new JButton("COMPRAR");
 		btnComprarTacos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				window4.setVisible(true);
+				showTaco();
 			}
 		});
 		btnComprarTacos.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
@@ -171,7 +166,7 @@ public class Compras extends JInternalFrame {
 		JButton btnComprarPapas = new JButton("COMPRAR");
 		btnComprarPapas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				window5.setVisible(true);
+				showPapasFritas();
 			}
 		});
 		btnComprarPapas.setIcon(new ImageIcon(Compras.class.getResource("/icons16px/shopping-cart.png")));
@@ -180,12 +175,31 @@ public class Compras extends JInternalFrame {
 		panel_2_1.add(btnComprarPapas);
 	}
 	
+	void showHamburguesa() {
+		CompraHamburguesa compraHamburguesa = new CompraHamburguesa();
+		compraHamburguesa.setVisible(true);
+	}
+	
+	void showPizza() {
+		CompraPizza compraPizza = new CompraPizza();
+		compraPizza.setVisible(true);
+	}
+	
+	void showTaco() {
+		CompraTaco compraTaco = new CompraTaco();
+		compraTaco.setVisible(true);
+	}
+	
+	void showPapasFritas() {
+		CompraPapasFritas compraPapasFritas = new CompraPapasFritas();
+		compraPapasFritas.setVisible(true);
+	}
+	
 	/**
 	 * Create the frame.
 	 */
 	public Compras() {
 		setClosable(true);
-		setResizable(true);
 		setTitle("Compras");
 		designGUI();
 	}

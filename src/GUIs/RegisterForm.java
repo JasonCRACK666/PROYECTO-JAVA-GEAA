@@ -1,6 +1,5 @@
 package GUIs;
 
-import java.awt.BorderLayout;
 
 import java.awt.EventQueue;
 
@@ -18,9 +17,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class RegisterForm extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
 	private JLabel lblNombreDeUsuario;
@@ -32,8 +33,6 @@ public class RegisterForm extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JButton btnRegister;
 	private JPasswordField tswPassword;
-	private App app;
-	private FormularioPrincipal FormularioPrincipal;
 	private JButton btnRedirectBack;
 
 	/**
@@ -56,6 +55,7 @@ public class RegisterForm extends JFrame {
 	 * Create the frame.
 	 */
 	public RegisterForm() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisterForm.class.getResource("/images/logo de la empresa.jpg")));
 		setResizable(false);
 		setBounds(100, 100, 540, 336);
 		contentPane = new JPanel();
@@ -145,7 +145,8 @@ public class RegisterForm extends JFrame {
 		contentPane.add(btnRedirectBack);
 	}
 	
-	String name, username, email, password;
+	String name, email, password;
+	public static String username;
 	
 	void registerAction() {
 		name = tfName.getText();

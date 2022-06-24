@@ -1,6 +1,5 @@
 package GUIs;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import Objects.Taco;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -17,10 +19,22 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CompraTaco extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JComboBox<String> cboSabTaco;
+	private JCheckBox chkGuacamole;
+	private JCheckBox chkJalapeno;
+	private JCheckBox chkMozzarella;
+	private JCheckBox chkAlmibar;
 
 	/**
 	 * Launch the application.
@@ -42,6 +56,7 @@ public class CompraTaco extends JFrame {
 	 * Create the frame.
 	 */
 	public CompraTaco() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CompraTaco.class.getResource("/images/logo de la empresa.jpg")));
 		setTitle("Datos de Compra - TACOS");
 		setBounds(100, 100, 847, 530);
 		contentPane = new JPanel();
@@ -113,41 +128,41 @@ public class CompraTaco extends JFrame {
 		label_5.setBounds(21, 337, 242, 29);
 		contentPane.add(label_5);
 		
-		JComboBox cboSaborTaco = new JComboBox();
-		cboSaborTaco.setModel(new DefaultComboBoxModel(new String[] {"Al Pastor", "Campechano (+ S/.2.00)", "Ranchero (+ S/.4.00)"}));
-		cboSaborTaco.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-		cboSaborTaco.setBackground(Color.WHITE);
-		cboSaborTaco.setBounds(269, 337, 222, 29);
-		contentPane.add(cboSaborTaco);
+		cboSabTaco = new JComboBox<String>();
+		cboSabTaco.setModel(new DefaultComboBoxModel<String>(new String[] {"Al Pastor", "Campechano (+ S/.2.00)", "Ranchero (+ S/.4.00)"}));
+		cboSabTaco.setFont(new Font("Century Gothic", Font.PLAIN, 16));
+		cboSabTaco.setBackground(Color.WHITE);
+		cboSabTaco.setBounds(269, 337, 222, 29);
+		contentPane.add(cboSabTaco);
 		
 		JLabel label_6 = new JLabel("ESCOGE TUS EXTRAS (+ S/. 3.00 c/u)");
 		label_6.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		label_6.setBounds(21, 371, 315, 29);
 		contentPane.add(label_6);
 		
-		JCheckBox checkBox = new JCheckBox("Guacamole");
-		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox.setBackground(Color.WHITE);
-		checkBox.setBounds(21, 398, 113, 35);
-		contentPane.add(checkBox);
+		chkGuacamole = new JCheckBox("Guacamole");
+		chkGuacamole.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkGuacamole.setBackground(Color.WHITE);
+		chkGuacamole.setBounds(21, 398, 113, 35);
+		contentPane.add(chkGuacamole);
 		
-		JCheckBox checkBox_1 = new JCheckBox("Jalape\u00F1o");
-		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_1.setBackground(Color.WHITE);
-		checkBox_1.setBounds(138, 398, 97, 35);
-		contentPane.add(checkBox_1);
+		chkJalapeno = new JCheckBox("Jalape\u00F1o");
+		chkJalapeno.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkJalapeno.setBackground(Color.WHITE);
+		chkJalapeno.setBounds(138, 398, 97, 35);
+		contentPane.add(chkJalapeno);
 		
-		JCheckBox checkBox_2 = new JCheckBox("Mozzarella");
-		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_2.setBackground(Color.WHITE);
-		checkBox_2.setBounds(244, 398, 113, 35);
-		contentPane.add(checkBox_2);
+		chkMozzarella = new JCheckBox("Mozzarella");
+		chkMozzarella.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkMozzarella.setBackground(Color.WHITE);
+		chkMozzarella.setBounds(244, 398, 113, 35);
+		contentPane.add(chkMozzarella);
 		
-		JCheckBox checkBox_3 = new JCheckBox("Pi\u00F1a en Alm\u00EDbar");
-		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		checkBox_3.setBackground(Color.WHITE);
-		checkBox_3.setBounds(361, 398, 155, 35);
-		contentPane.add(checkBox_3);
+		chkAlmibar = new JCheckBox("Pi\u00F1a en Alm\u00EDbar");
+		chkAlmibar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chkAlmibar.setBackground(Color.WHITE);
+		chkAlmibar.setBounds(361, 398, 155, 35);
+		contentPane.add(chkAlmibar);
 		
 		JLabel label_7 = new JLabel("* Descuentos del 10% los d\u00EDas S\u00E1bados y Domingos en cualquier sabor de tu taco");
 		label_7.setFont(new Font("Century Gothic", Font.PLAIN, 11));
@@ -155,9 +170,66 @@ public class CompraTaco extends JFrame {
 		contentPane.add(label_7);
 		
 		JButton btnComprarTaco = new JButton("COMPRAR");
+		btnComprarTaco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comprarTaco();
+			}
+		});
 		btnComprarTaco.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		btnComprarTaco.setBounds(680, 434, 137, 35);
 		contentPane.add(btnComprarTaco);
 	}
 
+	private void comprarTaco() {
+		int indexSabTaco, amountCostExtras;
+		double price = 0;
+		String sabTaco = "";
+		
+		indexSabTaco = cboSabTaco.getSelectedIndex();
+
+		Taco taco = new Taco();
+
+		if (chkAlmibar.isSelected()) {
+			taco.setExtra("Piña en Almíbar");
+		}
+		
+		if (chkGuacamole.isSelected()) {
+			taco.setExtra("Guacamole");
+		}
+		
+		if (chkJalapeno.isSelected()) {
+			taco.setExtra("Jalapeño");
+		}
+		
+		if (chkMozzarella.isSelected()) {
+			taco.setExtra("Mozzarella");
+		}
+		
+		amountCostExtras = taco.getCountExtras() * 3;
+		
+		switch (indexSabTaco) {
+			case 0:
+				sabTaco = "Al Pastor";
+				break;
+			case 1:
+				price = amountCostExtras + 2;
+				sabTaco = "Campechano";
+				break;
+			case 2:
+				price = amountCostExtras + 4;
+				sabTaco = "Ranchero";
+				break;
+			default:
+				break;
+		}
+		
+		taco.setSabor(sabTaco);
+		taco.setPriceTotal(price);
+		
+		this.setVisible(false);
+		BoletaVentaTaco boleta = new BoletaVentaTaco();
+		boleta.getData(taco);
+		boleta.setVisible(true);
+	}
+	
 }
